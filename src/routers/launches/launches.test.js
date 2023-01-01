@@ -3,9 +3,14 @@ const request = require('supertest');
 const app = require('../../app');
 const database = require('../../services/database');
 
+const { loadPlanets } = require('../../models/planets.model');
+const { loadLaunches } = require('../../models/launches.model');
+
 describe('Test /v1/launches', () => {
     beforeAll(async () => {
         await database.connect();
+        await loadPlanets();
+        await loadLaunches();
     });
 
     afterAll(async () => {
